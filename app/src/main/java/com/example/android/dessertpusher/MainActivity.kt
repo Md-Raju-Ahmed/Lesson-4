@@ -18,6 +18,7 @@ package com.example.android.dessertpusher
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -71,7 +72,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("onCreate Called")
+        Timber.i("onStart called")
+        Log.i("MainActivity", "onCreate called")
 
         // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -169,6 +171,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         return super.onOptionsItemSelected(item)
     }
 
+
     /**
      * Called when the user navigates away from the app but might come back
      */
@@ -180,39 +183,42 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        Timber.i("onRestoreInstanceState Called")
-    }
+override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    super.onRestoreInstanceState(savedInstanceState)
+    Timber.i("onRestoreInstanceState Called")
+}
 
-    /** Lifecycle Methods **/
-    override fun onStart() {
-        super.onStart()
-        Timber.i("onStart Called")
-    }
+/** Lifecycle Methods **/
+override fun onStart() {
+    super.onStart()
+    dessertsSold = 0
+    Timber.i("onStart called")
+    dessertTimer.startTimer()
+}
 
-    override fun onResume() {
-        super.onResume()
-        Timber.i("onResume Called")
-    }
+override fun onResume() {
+    super.onResume()
+    Timber.i("onResume Called")
+}
 
-    override fun onPause() {
-        super.onPause()
-        Timber.i("onPause Called")
-    }
+override fun onPause() {
+    super.onPause()
+    Timber.i("onPause Called")
+}
 
-    override fun onStop() {
-        super.onStop()
-        Timber.i("onStop Called")
-    }
+override fun onStop() {
+    super.onStop()
+    Timber.i("onStop Called")
+    dessertTimer.stopTimer()
+}
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.i("onDestroy Called")
-    }
+override fun onDestroy() {
+    super.onDestroy()
+    Timber.i("onDestroy Called")
+}
 
-    override fun onRestart() {
-        super.onRestart()
-        Timber.i("onRestart Called")
-    }
+override fun onRestart() {
+    super.onRestart()
+    Timber.i("onRestart Called")
+}
 }
